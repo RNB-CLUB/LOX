@@ -1,37 +1,331 @@
-:root{
-    --primary-100:#7FFF00;
-    --primary-200:#aaff70;
-    --primary-300:#266100;
-    --accent-100:#00FF7F;
-    --accent-200:#00971f;
-    --text-100:#000000;
-    --text-200:#2c2c2c;
-    --bg-100:#DFFF00;
-    --bg-200:#d4f500;
-    --bg-300:#bde400;
-      
+:root {
+    --shit-dark:   #2B1B12;
+    --shit-mid:    #5C3A21;
+    --shit-main:   #8B5A2B;
+    --shit-light:  #C4A484;
+    --shit-cream:  #E8D5B5;
+    --shit-yellow: #D4A017;
+    --usa-red:     #E31C25;
+    --usa-blue:    #002868;
+    --pop-pink:    #FF2D95;
+    --pop-cyan:    #00F0FF;
+    --black:       #111;
 }
 
-*{
+* {
     margin: 0;
-
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background-color: var(--bg-100);
-    color: var(--text-100);
-}
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-.modal form {
-    margin: auto;
-    margin-top: 20vh;
-    width: fit-content;
+body {
+    background-color: #3D2B1F;
+    background-image: 
+        radial-gradient(circle, #5C3A21 2px, transparent 2px),
+        radial-gradient(circle, #8B5A2B 1.5px, transparent 1.5px);
+    background-size: 28px 28px, 18px 18px;
+    background-position: 0 0, 9px 9px;
+    color: var(--shit-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 0.3 rem;
+    overflow-x: hidden;
+}
+
+/* ========== HEADER + ПОП-АРТ ФЛАГ ========== */
+header {
+    position: relative;
+    height: 160px;
+    background: #E31C25; /* красный как основа */
+    border-bottom: 10px solid #111;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* красные полосы флага */
+header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        180deg,
+        #E31C25 0 7.69%,
+        #FFFFFF 7.69% 15.38%
+    );
+    z-index: 1;
+}
+
+/* синий прямоугольник со звёздами (поп-арт) */
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 38%;
+    height: 53.8%; /* примерно 7/13 высоты */
+    background-color: #002868;
+    background-image: radial-gradient(circle, white 1.8px, transparent 1.8px);
+    background-size: 14px 14px;
+    background-position: 7px 7px;
+    border-right: 6px solid #111;
+    border-bottom: 6px solid #111;
+    z-index: 2;
+}
+/* ЛОГО — максимально поп-арт */
+header h1 {
+    position: relative;
+    z-index: 10;
+    font-size: clamp(3.8rem, 13vw, 6.5rem);
+    font-weight: 900;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #fff;
+    -webkit-text-stroke: 5px #111;
+    text-shadow: 
+        7px 7px 0 #111,
+        0 0 30px #FF2D95,
+        0 0 60px #00F0FF;
+    margin: 0;
+    transform: rotate(-3deg);
+    animation: logoCrazy 2.8s ease-in-out infinite;
+}
+
+@keyframes logoCrazy {
+    0%, 100% { 
+        transform: rotate(-3deg) scale(1); 
+        text-shadow: 7px 7px 0 #111, 0 0 20px #FF2D95;
+    }
+    25% { 
+        transform: rotate(2deg) scale(1.07); 
+        text-shadow: 9px 9px 0 #111, 0 0 40px #00F0FF;
+    }
+    50% { 
+        transform: rotate(-4deg) scale(1.04); 
+        text-shadow: 6px 6px 0 #111, 0 0 50px #FF2D95;
+    }
+    75% { 
+        transform: rotate(3deg) scale(1.09); 
+        text-shadow: 10px 10px 0 #111, 0 0 35px #00F0FF;
+    }
+}
+
+header h1 span {
+    color: #FFD700;
+    -webkit-text-stroke: 5px #111;
+}
+
+/* ========== ОБЪЯВЛЕНИЯ (.ad) ========== */
+.wrapper {
+    flex: 1;
+    padding: 2rem 1rem 5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1.8rem;
+}
+
+.ad {
+    background: var(--shit-cream);
+    border: 6px solid var(--black);
+    border-radius: 8px; /* почти острые, поп-арт */
+    padding: 1.4rem;
+    box-shadow: 10px 10px 0 var(--black);
+    position: relative;
+    transition: 0.2s;
+}
+
+.ad:hover {
+    transform: translate(-6px, -6px) rotate(-1deg);
+    box-shadow: 16px 16px 0 var(--black);
+    background: #f5e6c8;
+}
+
+/* точки как в поп-арте */
+.ad::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, var(--shit-main) 2px, transparent 2px);
+    background-size: 10px 10px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.ad h3 {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: var(--shit-dark);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    -webkit-text-stroke: 0.5px var(--shit-dark);
+}
+
+.ad p {
+    font-size: 1.05rem;
+    color: #3D2B1F;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+/* ========== МОДАЛКА ========== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 10, 5, 0.92);
+    z-index: 100;
+    backdrop-filter: blur(4px);
+}
+
+.modal form {
+    margin: 10vh auto 0;
+    width: min(92%, 420px);
+    background: var(--shit-cream);
+    border: 8px solid var(--black);
+    border-radius: 6px;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 12px 12px 0 var(--black);
+    animation: modalSlam 0.35s cubic-bezier(0.22, 1.2, 0.36, 1);
+}
+
+@keyframes modalSlam {
+    from { transform: scale(0.6) rotate(-6deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.modal form h2 {
+    text-align: center;
+    font-size: 1.9rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--shit-dark);
+    -webkit-text-stroke: 1.5px var(--black);
+    letter-spacing: 1px;
+}
+
+.modal label {
+    font-weight: 800;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+}
+
+.modal input,
+.modal textarea {
+    padding: 0.85rem 1.1rem;
+    border: 5px solid var(--black);
+    border-radius: 4px;
+    background: #fff8e7;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--shit-dark);
+}
+
+.modal input:focus,
+.modal textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--pop-pink);
+}
+
+.modal textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.close {
+    align-self: flex-end;
+    width: 48px;
+    height: 48px;
+    background: var(--usa-red);
+    color: white;
+    border: 5px solid var(--black);
+    border-radius: 4px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.close:hover {
+    transform: scale(1.15) rotate(12deg);
+    background: #b30000;
+}
+
+.add-button {
+    margin-top: 0.4rem;
+    padding: 1.1rem;
+    background: var(--shit-dark);
+    color: var(--shit-cream);
+    border: 5px solid var(--black);
+    border-radius: 4px;
+    font-size: 1.7rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 6px 6px 0 var(--black);
+    text-transform: uppercase;
+}
+
+.add-button:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 11px 11px 0 var(--black);
+    background: #1a0f0a;
+}
+
+/* ========== КНОПКА + ========== */
+.open {
+    position: fixed;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    width: 78px;
+    height: 78px;
+    background: var(--pop-pink);
+    color: white;
+    font-size: 3.2rem;
+    font-weight: 900;
+    border: 6px solid var(--black);
+    border-radius: 8px;
+    box-shadow: 8px 8px 0 var(--black);
+    cursor: pointer;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: 0.2s;
+    animation: openPop 2.2s ease-in-out infinite;
+}
+
+@keyframes openPop {
+    0%, 100% { transform: scale(1) rotate(0); }
+    50% { transform: scale(1.12) rotate(6deg); }
+}
+
+.open:hover {
+    transform: scale(1.2) rotate(-12deg);
+    background: var(--pop-cyan);
+    color: var(--black);
+}
+
+/* ========== ФУТЕР ========== */
+footer {
+    background: var(--shit-dark);
+    color: var(--shit-cream);
+    padding: 1.6rem;
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.15rem;
+    border-top: 8px solid var(--black);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 -8px 0 var(--shit-main);
 }

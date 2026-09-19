@@ -8,7 +8,7 @@ document.querySelector(".modal form").addEventListener("submit", (event) => {
     event.preventDefault()
     let data = {
         title: event.target["title"].value,
-        description: event.target["description"].value
+        desc: event.target["description"].value
     }
     fetch("/add", {
         method: "POST",
@@ -16,14 +16,14 @@ document.querySelector(".modal form").addEventListener("submit", (event) => {
             "content-type": "application/json"
         },
         body: JSON.stringify(data)
-    }).then(()=>location.reload())
+    }).then(() => location.reload())
 })
 
-let wrapper = document.querySelector(".wrapper")
-fetch("/posts").then(res => res.json()).then(data=>{
-    wrapper.innerHTML += `
-    <div class="ad">
-    <h3>${post.title}</h3>
-    <p>${post.description}</p>
-    </div>`
-})
+// let wrapper = document.querySelector(".wrapper")
+// fetch("/posts").then(res => res.json()).then(data => {
+//     wrapper.innerHTML += `
+//     <div class="ad">
+//     <h3>${post.title}</h3>
+//     <p>${post.description}</p>
+//     </div>`
+// })
