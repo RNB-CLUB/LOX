@@ -1,0 +1,137 @@
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: $modal-overlay;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+
+    &.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    form {
+        margin: 0 auto;
+        width: min(92%, 420px);
+        background: $shit-cream;
+        border: 8px solid $black;
+        border-radius: 6px;
+        padding: 1.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        box-shadow: 12px 12px 0 $black;
+        animation: modalSlam 0.35s cubic-bezier(0.22, 1.2, 0.36, 1);
+
+        h2 {
+            text-align: center;
+            font-size: 1.9rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: $shit-dark;
+            -webkit-text-stroke: 1.5px $black;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        label {
+            font-weight: 800;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            color: $shit-dark;
+        }
+
+        input,
+        textarea {
+            padding: 0.85rem 1.1rem;
+            border: 5px solid $black;
+            border-radius: 4px;
+            background: $cream-input;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: $shit-dark;
+            width: 100%;
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 4px $pop-pink;
+            }
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+
+        .add-button {
+            margin-top: 0.4rem;
+            padding: 1.1rem;
+            background: $shit-dark;
+            color: $shit-cream;
+            border: 5px solid $black;
+            border-radius: 4px;
+            font-size: 1.7rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 6px 6px 0 $black;
+            text-transform: uppercase;
+
+            &:hover {
+                transform: translate(-5px, -5px);
+                box-shadow: 11px 11px 0 $black;
+                background: $brown-dark;
+            }
+
+            &:active {
+                transform: translate(2px, 2px);
+                box-shadow: 3px 3px 0 $black;
+            }
+        }
+    }
+}
+
+@keyframes modalSlam {
+    from {
+        transform: scale(0.6) rotate(-6deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    align-self: flex-end;
+    width: 48px;
+    height: 48px;
+    background: $usa-red;
+    color: $white;
+    border: 5px solid $black;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 4px 4px 0 $black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+
+    &:hover {
+        transform: scale(1.15) rotate(12deg);
+        background: $red-dark;
+    }
+
+    &:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 $black;
+    }
+}

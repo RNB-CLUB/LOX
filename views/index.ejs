@@ -8,20 +8,23 @@
 
             <% posts.forEach((post)=> { %>
                 <div class="ad">
-                    <img src="/uploads/<%= post.image ? post.image[0] : '' %>" alt="">
-                    <h3>
-                        <%= post.title %>
-                    </h3>
-                    <p>
-                        <%= post.description %>
-                    </p>
+                    <a href="/post/<%= post.id %>" class="a">
+                        <img src="/uploads/<%= post.image ? post.image[0] : '' %>" alt="">
+                        <h3>
+                            <%= post.title %>
+                        </h3>
+                        <p>
+                            <%= post.description %>
+                        </p>
+                        <% }) %>
+                    </a>
                 </div>
-                <% }) %>
 
-                    <%- include("modal.ejs") %>
-                        <button class="open">+</button>
 
-                        <%- include("footer.ejs") %>
+                <%- include("modal.ejs") %>
+                    <button class="open">+</button>
+
+                    <%- include("footer.ejs") %>
     </body>
 
 </html>
