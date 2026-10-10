@@ -1,7 +1,13 @@
-@import "./base/color.scss";
-@import "./components/modal.scss";
-@import "./base/typography.scss";
-@import "./base/clearDefault.scss";
+@use "./base/mixins" as mixins;
+@use "./base/functions" as f;
+
+
+
+@import "./base/color";
+@import "./components/modal";
+@import "./base/typography";
+@import "./base/clearDefault";
+@import "./components/post";
 
 
 * {
@@ -9,6 +15,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+@debug(f.say_hello("hello"));
+@warn(f.randomColor());
+@error(f.pow(2, 3));
 
 body {
     background-color: $shit-bg;
@@ -34,6 +44,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    @include mixins.transparent-shadow();
 }
 
 header::after {
@@ -46,6 +57,15 @@ header::after {
         $white 7.69% 15.38%
     );
     z-index: 1;
+}
+
+.wrapper{
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+    padding: 1;
+    gap: 0.5;
+    @include mixins.responsive-container();
 }
 
 header::before {
@@ -178,6 +198,10 @@ header h1 span {
         0 0 24px $shadow-rgba-2,
         0 0 36px $shadow-rgba-3;
     transition: 0.3s ease;
+    P{
+        @include mixins.ellipsisText();
+    }
+    @include mixins.removeLinkStyle();
 }
 
 .ad img:hover {
@@ -341,6 +365,7 @@ footer {
     text-transform: uppercase;
     letter-spacing: 2px;
     box-shadow: 0 -8px 0 $shit-main;
+    @include mixins.transparent-shadow($y: -5px);
 }
 
 #image {
