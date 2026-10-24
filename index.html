@@ -1,33 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <title><%= post.title %> - Brutalist App</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
     <header>
-        <h1>LOX</h1>
+        <h1>LOX <span>APP</span></h1>
     </header>
-    <header>
-        <div class="wrapper"></div>
-        <div class="modal">
-            <form>
-                <button class="close">X</button>
-                <h2>Add new</h2>
-                <label for="title">Title</label>
-                <input type="text" name="title" required>
-                <label for="description">Description</label>
-                <textarea name="description" id=""></textarea>
-                <button class="add-button">+</button>
-            </form>
-        </div>
-        <button class="open">+</button>
-    </header>
-</body>
 
+    <main class="post-container">
+        <!-- Сам пост -->
+        <article class="post-single">
+            <h1><%= post.title %></h1>
+            <p class="post-desc"><%= post.description %></p>
+            
+            <% if (post.image && post.image.length > 0) { %>
+                <div class="post-images">
+                    <% post.image.forEach(i => { %>
+                        <img src="/uploads/<%= i %>" alt="Post image">
+                    <% }) %>
+                </div>
+            <% } %>
+        </article>
+
+        <!-- Секція коментарів -->
+        <section class="comments-section">
+            <h2>Коментарі</h2>
+            
+            <!-- Форма додавання коментаря -->
+            <form action="/comment" method="POST" class="comment-form">
+                <input type="hidden" name="post_id" value="<%= post.id %>">
+                
+                <label for="author">Автор</label>
+                <input type="text" id="author" name="author" required>
+
+                <label for="comment">Коментар</label>
+                <textarea id="comment" name="comment" required></textarea>
+
+                <button type="submit" class="add-button">Додати коментар</button>
+            </form>
+
+            <!-- Список коментарів -->
+            <ul class="comments-list">
+                <% if (comments && comments.length > 0) { %>
+                    <% comments.forEach(c => { %>
+                        <li class="comment-item">
+                            <h3><%= c.author %></h3>
+                            <p><%= c.comment %></p>
+                        </li>
+                    <% }) %>
+                <% } else { %>
+                    <p class="no-comments">Ще немає коментарів. Будь першим!</p>
+                <% } %>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Brutalist Style</p>
+    </footer>
+</body>
 </html>

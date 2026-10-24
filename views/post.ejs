@@ -16,6 +16,15 @@
                         <img src="<%=i%>" <%})%>
                 </div>
             </main>
+            <%- include("commentForm.ejs") %>
+            <ul>
+                <% comments.forEach(c=>{ %>
+                    <li>
+                        <h3><%=c.author%></h3>
+                        <p><%= c.comment%></p>
+                    </li>
+             <% })%>
+            </ul>
             <%- include("footer.ejs") %>
     </body>
 
